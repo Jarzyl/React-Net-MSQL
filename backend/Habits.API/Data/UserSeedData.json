@@ -1,0 +1,28 @@
+[
+  {
+    "UserName": "Bart",
+    "LastName": "Dest",
+    "Gender": "male",
+    "DateOfBirth": "1999-07-25",
+    "CreatedAt": "2023-09-26",
+    "City": "Oceola",
+    "Country": "Nepal",
+    "PhoneNumber": "123456789",
+    "PostalCode": "55-555",
+    "AccountBalance": 3000,
+    "Email": "xhaltx4@gmail.com"
+  },
+  {
+    "UserName": "Mays",
+    "LastName": "Lays",
+    "Gender": "male",
+    "DateOfBirth": "1992-05-21",
+    "CreatedAt": "2023-02-20",
+    "City": "Navarre",
+    "Country": "United States",
+    "PhoneNumber": "999888777",
+    "PostalCode": "11-333",
+    "AccountBalance": 2000,
+    "Email": "mayslays@gmail.com"
+  }
+]
