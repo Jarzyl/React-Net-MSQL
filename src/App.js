@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HeroSection from './components/HeroSection.tsx';
+import Login from './components/Login.tsx';
+import Layout from './Layout/layout.tsx';
+import HabitPage from './components/HabitPage.tsx';
+import Register from './components/Register.tsx';
+import Dashboard from './components/Dashboard.tsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+      <Routes>
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/habits" element={<HabitPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+        </Layout>
+    </Router>
   );
 }
 
