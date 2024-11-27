@@ -14,6 +14,7 @@ const getUserFromLocalStorage = () => {
 // Początkowy stan
 const initialState = {
   user: getUserFromLocalStorage(),
+  redirectPath: '', // Dodajemy zmienną do przechowywania ścieżki przekierowania
   loading: false,
   error: null,
 };
@@ -25,18 +26,23 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
+      state.redirectPath = ''; // Resetujemy ścieżkę przekierowania po zalogowaniu
       saveUserToLocalStorage(action.payload); // zapisujemy dane użytkownika w localStorage
     },
     logout: (state) => {
       state.user = null;
+      state.redirectPath = ''; // Resetujemy ścieżkę przekierowania po wylogowaniu
       localStorage.removeItem("user"); // usuwamy dane użytkownika z localStorage
     },
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setRedirectPath: (state, action) => {
+      state.redirectPath = action.payload; // Nowa akcja do ustawienia ścieżki przekierowania
+    },
   },
 });
 
 // Eksportujemy akcje i reducer
-export const { login, logout, setError } = authSlice.actions;
+export const { login, logout, setError, setRedirectPath } = authSlice.actions;
 export default authSlice.reducer;
