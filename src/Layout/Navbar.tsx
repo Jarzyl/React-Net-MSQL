@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Logout from "./Logout.tsx"; // Importujemy komponent Logout
+import Logout from "../components/Logout.tsx"; // Importujemy komponent Logout
 
 export default function Navbar() {
   const user = useSelector((state: any) => state.auth.user); // Pobieramy stan użytkownika z Redux
@@ -62,7 +62,7 @@ export default function Navbar() {
           ) : (
             // Jeśli użytkownik nie jest zalogowany, wyświetlamy link do logowania
             <Link to="/login" className="text-sm font-semibold text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
+              <button className="w-32 h-10 text-lg bg-blue-500">Log In</button>
             </Link>
           )}
         </div>

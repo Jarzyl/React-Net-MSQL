@@ -6,10 +6,14 @@ const Logout = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout()); // Wywołanie akcji logout
+    dispatch(logout());
   };
 
-  return <button className="h-10 bg-red-500 w-30" onClick={handleLogout}>Wyloguj się</button>;
+  return (
+    <button className="w-32 h-10 text-lg font-semibold bg-blue-500" onClick={handleLogout}>
+      Log Out
+    </button>
+  );
 };
 
 export default Logout;
