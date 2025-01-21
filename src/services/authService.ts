@@ -1,6 +1,7 @@
 import { API_URL } from "../config/env.ts";
 import { setError, login } from "../redux/authSlice.ts";
 import { Dispatch } from "@reduxjs/toolkit";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export const loginUser = async (
   email: string,
@@ -23,13 +24,21 @@ export const loginUser = async (
     }
 
     const data = await response.json();
-    dispatch(login({ token: data.token }));
-    return data; // Opcjonalnie, jeśli chcesz zwrócić jakieś dane
+    
+    // Dekodowanie tokenu, aby wyciągnąć userId
+    const decodedToken = jwtDecode<JwtPayload>(data.token);
+    const userId = decodedToken.userId;
+
+    // Zapisujemy token i userId w Redux
+    dispatch(login({ token: data.token, userId }));
+
+    return data; // Opcjonalnie, jeśli chcesz zwrócić dane
   } catch (err) {
     dispatch(setError("Wystąpił błąd. Spróbuj ponownie."));
     console.error(err);
   }
 };
+
 
 export async function registerUser(data: {
     userName: string;

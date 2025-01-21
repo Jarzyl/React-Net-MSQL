@@ -6,9 +6,13 @@ import HabitPage from "./pages/habits/HabitPage.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import RegisterPage from "./pages/register/RegisterPage.tsx";
 import DashboardPage from "./pages/dashboard/DashboardPage.tsx";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <Router>
       <Layout>
         <Routes>
@@ -20,6 +24,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
+    </QueryClientProvider>
   );
 }
 

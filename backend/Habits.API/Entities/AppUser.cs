@@ -1,4 +1,6 @@
+using Habits.Api.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace Habits.API.Entities
 {
@@ -18,5 +20,7 @@ namespace Habits.API.Entities
         public byte[] ProfileImage { get; set; }
         public string PhoneNumber { get; set; }
         public string PostalCode { get; set; }
+
+        public ICollection<Habit> Habits { get; set; } = [];
     }
 }
