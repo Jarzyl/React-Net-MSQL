@@ -1,4 +1,6 @@
-﻿using Habits.API.Data;
+﻿using Habits.Api.Data;
+using Habits.Api.Interfaces;
+using Habits.API.Data;
 using Habits.API.Interfaces;
 using Habits.API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,7 @@ public static class ApplicationServiceExtensions
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IHabitRepository, HabitRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         return services;

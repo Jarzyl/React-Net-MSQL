@@ -11,11 +11,19 @@ const getUserFromLocalStorage = () => {
   return savedUser ? JSON.parse(savedUser) : null;
 };
 
+// Funkcja pomocnicza do pobrania tylko userId z localStorage
+const getUserIdFromLocalStorage = () => {
+  const savedUser = localStorage.getItem("user");
+  const user = savedUser ? JSON.parse(savedUser) : null;
+  return user ? user.userId : null;  // Zwróci userId lub null, jeśli nie ma w localStorage
+};
+
 // Początkowy stan
 const initialState = {
   user: getUserFromLocalStorage(),
   redirectPath: '', // Dodajemy zmienną do przechowywania ścieżki przekierowania
   loading: false,
+  userId: getUserIdFromLocalStorage(),
   error: null,
 };
 
@@ -26,12 +34,14 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
+      state.userId = action.payload.userId;  // Przypisujemy userId po zalogowaniu
       state.redirectPath = ''; // Resetujemy ścieżkę przekierowania po zalogowaniu
       saveUserToLocalStorage(action.payload); // zapisujemy dane użytkownika w localStorage
     },
     logout: (state) => {
       state.user = null;
-      state.redirectPath = ''; // Resetujemy ścieżkę przekierowania po wylogowaniu
+      state.userId = null; // Resetujemy userId po wylogowaniu
+      state.redirectPath = '/'; // Resetujemy ścieżkę przekierowania po wylogowaniu
       localStorage.removeItem("user"); // usuwamy dane użytkownika z localStorage
     },
     setError: (state, action) => {

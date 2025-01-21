@@ -1,31 +1,35 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addHabit } from "../redux/habitsSlice.ts";
+import { useSelector } from "react-redux";
+import { useCreateHabitMutation } from "../services/habitQueryService.ts";
 
 const AddHabitForm: React.FC = () => {
   const [habitName, setHabitName] = useState("");
-  const dispatch = useDispatch();
+  
+  // Pobranie userId z Redux (zakładając, że użytkownik jest zapisany w stanie auth)
+  const userId = useSelector((state: any) => state.auth.userId);
+
+  // Używamy mutacji do dodania nawyku
+  const mutation = useCreateHabitMutation(userId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (habitName.trim()) {
-      dispatch(addHabit(habitName));
-      setHabitName("");
+    if (habitName.trim() && userId) {
+      // Wywołanie mutacji z nazwą nawyku
+      mutation.mutate(habitName);
+
+      // Resetowanie formularza po dodaniu nawyku
+      setHabitName('');
+    } else {
+      console.log("User ID is not available or habit name is empty");
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg mt-20 mb-20"
+      className="max-w-md p-4 mx-auto mt-20 mb-20 bg-white rounded-lg shadow-md"
     >
       <div className="mb-4">
-        <label
-          htmlFor="habitName"
-          className="block text-lg font-medium text-gray-700 mb-2"
-        >
-          Dodaj nowy nawyk
-        </label>
         <input
           id="habitName"
           type="text"
@@ -37,7 +41,7 @@ const AddHabitForm: React.FC = () => {
       </div>
       <button
         type="submit"
-        className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         Dodaj
       </button>

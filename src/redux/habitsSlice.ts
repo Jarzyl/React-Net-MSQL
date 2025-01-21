@@ -1,27 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Typ dla pojedynczego nawyku
 interface Habit {
   id: number;
   name: string;
   completed: boolean;
 }
 
-// Typ dla stanu nawyków
 interface HabitsState {
   habits: Habit[];
 }
 
-// Stan początkowy
 const initialState: HabitsState = {
-  habits: [
-    { id: 1, name: 'Picie wody', completed: false },
-    { id: 2, name: 'Ćwiczenia', completed: false },
-    { id: 3, name: 'Nauka języka', completed: false },
-  ],
+  habits: [],
 };
 
-// Tworzenie slice'a
+
 const habitsSlice = createSlice({
   name: 'habits',
   initialState,
@@ -44,6 +37,11 @@ const habitsSlice = createSlice({
       state.habits = state.habits.filter(habit => habit.id !== action.payload);
     },
   },
+  // extraReducers: (builder) => {
+  //   builder.addCase(fetchHabits.fulfilled, (state, action) => {
+  //     state.habits = action.payload;
+  //   });
+  // },
 });
 
 export const { toggleHabit, addHabit, removeHabit } = habitsSlice.actions;

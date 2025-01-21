@@ -20,16 +20,17 @@ namespace Habits.API.Services
         }
         public string CreateToken(AppUser user)
         {
+            // Dodajemy userId do claims
             var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
-            };
+    {
+        new(JwtRegisteredClaimNames.NameId, user.UserName),
+        new("userId", user.Id.ToString())  // Dodajemy userId jako claim
+    };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(100),
                 SigningCredentials = creds
@@ -41,5 +42,6 @@ namespace Habits.API.Services
 
             return tokenHandler.WriteToken(token);
         }
+
     }
 }

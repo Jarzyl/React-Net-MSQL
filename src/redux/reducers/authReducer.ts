@@ -1,5 +1,3 @@
-// redux/authReducer.ts
-
 const initialState = {
     user: null, 
     redirectPath: '', // Nowa zmienna
