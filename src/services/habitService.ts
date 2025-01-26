@@ -3,19 +3,19 @@ import axios from 'axios';
 
 // Pobieranie listy nawyków użytkownika
 export const getHabits = async (userId: number) => {
-  const response = await axios.get(`${API_URL}/habits/${userId}`);
+  const response = await axios.get(`${API_URL}/userhabits/${userId}`);
   return response.data;
 };
 
 // Tworzenie nowego nawyku
 export const createHabit = async (userId: number, habitData: { name: string }) => {
-  const response = await axios.post(`${API_URL}/habits/${userId}`, habitData);
+  const response = await axios.post(`${API_URL}/userhabits/${userId}`, habitData);
   return response.data;
 };
 
 // Usuwanie nawyku
 export const deleteHabit = async (habitId: number) => {
-  const response = await axios.delete(`${API_URL}/habits/${habitId}`);
+  const response = await axios.delete(`${API_URL}/userhabits/${habitId}`);
   return response.data;
 };
 

@@ -21,8 +21,16 @@ public static class ApplicationServiceExtensions
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IHabitRepository, HabitRepository>();
+        services.AddScoped<IUserHabitsRepository, UserHabitsRepository>();
+        services.AddScoped<IMainHabitsRepository, MainHabitsRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+        // Redis
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = config.GetValue<string>("Redis:ConnectionString"); // np. localhost:6379
+            options.InstanceName = "HabitsCache"; // Prefiks dla kluczy w Redis
+        });
 
         return services;
     }

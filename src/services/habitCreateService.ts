@@ -1,7 +1,7 @@
 import { API_URL } from "../config/env";
 
 export const executeCreate = async (userId: number, habitName: string) => {
-    const response = await fetch(`${API_URL}/habits/${userId}`, {
+    const response = await fetch(`${API_URL}/userhabits/${userId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

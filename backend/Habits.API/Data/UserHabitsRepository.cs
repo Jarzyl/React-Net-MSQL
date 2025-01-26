@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Habits.Api.Data
 {
-    public class HabitRepository : IHabitRepository
+    public class UserHabitsRepository : IUserHabitsRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
 
-        public HabitRepository(DataContext context, IMapper mapper) 
+        public UserHabitsRepository(DataContext context, IMapper mapper) 
         {
             _context = context;
             _mapper = mapper;

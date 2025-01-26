@@ -1,5 +1,5 @@
 import React from "react";
-import Dashboard from "../../components/Dashboard.tsx";
+import Dashboard from "./Dashboard.tsx";
 
 function DashboardPage() {
   return <Dashboard />

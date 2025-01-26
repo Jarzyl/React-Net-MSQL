@@ -7,7 +7,7 @@ namespace Habits.Api.Interfaces
     /// <summary>
     /// Interface for managing habit-related data operations.
     /// </summary>
-    public interface IHabitRepository
+    public interface IUserHabitsRepository
     {
         /// <summary>
         /// Retrieves a list of habits for a specific user.

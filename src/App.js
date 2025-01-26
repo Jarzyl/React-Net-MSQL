@@ -6,6 +6,7 @@ import HabitPage from "./pages/habits/HabitPage.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import RegisterPage from "./pages/register/RegisterPage.tsx";
 import DashboardPage from "./pages/dashboard/DashboardPage.tsx";
+import ForumPage from "./pages/forum/ForumPage.tsx";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/habits" element={<HabitPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/forum" element={<ForumPage />} />
         </Routes>
       </Layout>
     </Router>
