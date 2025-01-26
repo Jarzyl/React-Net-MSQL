@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Poranny bieg",
+    "Completed": false,
+    "CreatedAt": "2025-01-20T07:00:00Z",
+    "UserId": 4
+  },
+  {
+    "Name": "Picie wody",
+    "Completed": true,
+    "CreatedAt": "2025-01-19T08:30:00Z",
+    "UserId": 3
+  },
+  {
+    "Name": "Codzienne czytanie",
+    "Completed": false,
+    "CreatedAt": "2025-01-18T10:15:00Z",
+    "UserId": 3
+  }
+]

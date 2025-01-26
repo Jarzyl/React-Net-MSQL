@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Habits.Api.DTOs;
 using Habits.Api.Entities;
 using Habits.API.DTOs;
 using Habits.API.Entities;
@@ -16,6 +17,9 @@ namespace Habits.API.Helpers
             CreateMap<Habit, HabitDto>();
             // Mapowanie CreateHabitDto na Habit
             CreateMap<CreateHabitDto, Habit>();
+            // Mapowanie Habit na MainHabit
+            CreateMap<Habit, MainHabitDto>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
         }
     }
 }

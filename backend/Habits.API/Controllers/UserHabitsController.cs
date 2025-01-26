@@ -11,12 +11,12 @@ using AutoMapper;
 
 namespace Habits.API.Controllers
 {
-    public class HabitsController : BaseApiController
+    public class UserHabitsController : BaseApiController
     {
-        private readonly IHabitRepository _habitRepository;
+        private readonly IUserHabitsRepository _habitRepository;
         private readonly IMapper _mapper;
 
-        public HabitsController(IHabitRepository habitRepository, IMapper mapper)
+        public UserHabitsController(IUserHabitsRepository habitRepository, IMapper mapper)
         {
             _habitRepository = habitRepository;
             _mapper = mapper;

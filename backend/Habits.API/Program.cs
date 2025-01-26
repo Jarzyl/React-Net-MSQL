@@ -1,3 +1,4 @@
+﻿using Habits.Api.Data;
 using Habits.API.Data;
 using Habits.API.Extensions;
 using Habits.API.Middleware;
@@ -28,10 +29,14 @@ app.MapControllers();
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
+
 try
 {
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
+
+    // Seedowanie danych (dodajemy tutaj wywołanie metody seedującej)
+    //await SeedHabits.SeedHabitsAsync(context);
 }
 catch (Exception ex)
 {
