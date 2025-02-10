@@ -1,4 +1,4 @@
-import { API_URL } from "../config/env.ts";
+import { API_URL } from "../config/env";
 import axios from "axios";
 
 // Pobieranie listy nawyków użytkownika

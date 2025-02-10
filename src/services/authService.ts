@@ -1,7 +1,12 @@
-import { API_URL } from "../config/env.ts";
-import { setError, login } from "../redux/authSlice.ts";
+import { API_URL } from "../config/env";
+import { setError, login } from "../redux/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+
+// Rozszerzenie JwtPayload o userId
+interface CustomJwtPayload extends JwtPayload {
+  userId: string; // lub number, w zależności od typu userId
+}
 
 export const loginUser = async (
   email: string,
@@ -26,7 +31,7 @@ export const loginUser = async (
     const data = await response.json();
     
     // Dekodowanie tokenu, aby wyciągnąć userId
-    const decodedToken = jwtDecode<JwtPayload>(data.token);
+    const decodedToken = jwtDecode<CustomJwtPayload>(data.token);
     const userId = decodedToken.userId;
 
     // Zapisujemy token i userId w Redux
@@ -41,22 +46,21 @@ export const loginUser = async (
 
 
 export async function registerUser(data: {
-    userName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  }): Promise<void> {
-    const response = await fetch(`${API_URL}/account/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-  
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Błąd rejestracji.");
-    }
+  userName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}): Promise<void> {
+  const response = await fetch(`${API_URL}/account/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Błąd rejestracji.");
   }
-  
+}

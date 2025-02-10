@@ -1,5 +1,5 @@
 import { Middleware } from "@reduxjs/toolkit";
-import { setRedirectPath } from "../redux/authSlice.ts"; // Importujesz akcję setRedirectPath
+import { setRedirectPath } from "../redux/authSlice"; 
 
 const authMiddleware: Middleware = (store) => (next) => (action) => {
   const result = next(action);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Logout from "../components/Logout.tsx"; // Importujemy komponent Logout
+import Logout from "../components/Logout"; // Importujemy komponent Logout
 
 export default function Navbar() {
   const user = useSelector((state: any) => state.auth.user); // Pobieramy stan użytkownika z Redux

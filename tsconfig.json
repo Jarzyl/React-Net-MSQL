@@ -4,8 +4,9 @@
     "moduleResolution": "Node",
     "target": "ESNext",
     "module": "ESNext",
-    "allowImportingTsExtensions": true,
     "noEmit": true,
-    "allowSyntheticDefaultImports": true
-  }
+    "typeRoots": ["node_modules/@types"],
+    "esModuleInterop": true
+  },
+  "types": ["node", "jest", "@testing-library/jest-dom"],
 }

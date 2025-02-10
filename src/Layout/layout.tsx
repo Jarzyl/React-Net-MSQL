@@ -1,7 +1,7 @@
 import React from "react";
 
 import { FooterWithSocialLinks } from "./Footer.jsx";
-import Navbar from "./Navbar.tsx";
+import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
   return (

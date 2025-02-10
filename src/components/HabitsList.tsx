@@ -1,9 +1,9 @@
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getHabits, deleteHabit } from "../services/habitService.ts";
+import { getHabits, deleteHabit } from "../services/habitService";
 import { useSelector } from "react-redux";
-import HabitCard from "./reusable/HabitCart.tsx";
-import { Habit } from "../models/interfaces/habit.ts";
+import HabitCard from "./reusable/HabitCart";
+import { Habit } from "../models/interfaces/habit";
 
 const HabitList: React.FC = () => {
   const userId = useSelector((state: any) => state.auth.userId); // Redux dla auth

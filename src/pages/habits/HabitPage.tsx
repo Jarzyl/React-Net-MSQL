@@ -1,6 +1,6 @@
 import React from "react";
-import AddHabitForm from "../../components/AddHabitForm.tsx";
-import HabitList from "../../components/HabitsList.tsx";
+import AddHabitForm from "../../components/AddHabitForm";
+import HabitList from "../../components/HabitsList";
 
 function HabitPage() {
   return (
