@@ -2,10 +2,8 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { login, setError } from "../redux/authSlice.ts";
-import TextInput from "./reusable/TextInput.tsx";
-import { API_URL } from "../config/env.ts";
-import { loginUser } from "../services/authService.ts";
+import TextInput from "./reusable/TextInput";
+import { loginUser } from "../services/authService";
 
 
 interface LoginFormInputs {

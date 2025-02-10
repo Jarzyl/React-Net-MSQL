@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useCreateHabitMutation } from "../services/habitQueryService.ts";
+import { useCreateHabitMutation } from "../services/habitQueryService";
 
 const AddHabitForm: React.FC = () => {
   const [habitName, setHabitName] = useState("");

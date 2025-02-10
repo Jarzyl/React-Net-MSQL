@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { registerUser } from "../services/authService.ts";
-import TextInput from "./reusable/TextInput.tsx";
+import { registerUser } from "../services/authService";
+import TextInput from "./reusable/TextInput";
+import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {
   userName: string;
@@ -21,6 +23,8 @@ export default function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>();
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: RegisterFormData) => {
     const { password, confirmPassword, ...userData } = data;
 
@@ -34,7 +38,7 @@ export default function RegisterForm() {
 
     try {
       await registerUser({ ...userData, password });
-      // Tutaj można dodać logikę np. przekierowania po sukcesie
+      navigate("/login");
     } catch (error) {
       setError("email", {
         type: "manual",
