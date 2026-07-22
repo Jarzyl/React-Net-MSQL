@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../services/authService";
 import TextInput from "./reusable/TextInput";
-import { redirect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 interface RegisterFormData {
   userName: string;
@@ -19,7 +19,6 @@ export default function RegisterForm() {
     handleSubmit,
     watch,
     setError,
-    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>();
 
@@ -31,7 +30,7 @@ export default function RegisterForm() {
     if (password !== confirmPassword) {
       setError("confirmPassword", {
         type: "manual",
-        message: "Hasła muszą być takie same.",
+        message: "Passwords must match.",
       });
       return;
     }
@@ -39,11 +38,8 @@ export default function RegisterForm() {
     try {
       await registerUser({ ...userData, password });
       navigate("/login");
-    } catch (error) {
-      setError("email", {
-        type: "manual",
-        message: "Rejestracja nie powiodła się.",
-      });
+    } catch (error: any) {
+      toast.error(error.message || "Registration failed.");
     }
   };
 

@@ -26,7 +26,7 @@ public class AccountController: BaseApiController
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
 
-        if (await UserExists(registerDto.Email)) return BadRequest("Email is already taken");
+        if (await UserExists(registerDto.Email)) return BadRequest(new { message = "Email is already taken." });
 
         using var hmac = new HMACSHA512();
 
@@ -54,7 +54,7 @@ public class AccountController: BaseApiController
     {
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == loginDto.Email);
 
-        if(user == null) return Unauthorized("Invalid email");
+        if(user == null) return Unauthorized(new { message = "The account with the given email address does not exist." });
 
         using var hmac = new HMACSHA512(user.PasswordSalt);
 
@@ -62,7 +62,7 @@ public class AccountController: BaseApiController
 
         for(int i = 0; i < computedHash.Length; i++)
         {
-            if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
+            if (computedHash[i] != user.PasswordHash[i]) return Unauthorized(new { message = "Invalid password." });
         }
 
         return new UserDto

@@ -1,7 +1,8 @@
 import { API_URL } from "../config/env";
-import { setError, login } from "../redux/authSlice";
+import { login } from "../redux/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import { jwtDecode, JwtPayload } from "jwt-decode";
+import toast from 'react-hot-toast';
 
 // Rozszerzenie JwtPayload o userId
 interface CustomJwtPayload extends JwtPayload {
@@ -23,8 +24,17 @@ export const loginUser = async (
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      dispatch(setError(errorData.message || "Błąd logowania."));
+      // Próbujemy odczytać błąd jako JSON, jeśli się nie uda - jako text
+      let errorMessage = "Login error.";
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || "Login error.";
+      } catch {
+        // Jeśli odpowiedź nie jest JSON, odczytaj jako text
+        const errorText = await response.text();
+        errorMessage = errorText || "Login error.";
+      }
+      toast.error(errorMessage);
       return;
     }
 
@@ -36,10 +46,11 @@ export const loginUser = async (
 
     // Zapisujemy token i userId w Redux
     dispatch(login({ token: data.token, userId }));
+    toast.success("Logged in successfully!");
 
     return data; // Opcjonalnie, jeśli chcesz zwrócić dane
   } catch (err) {
-    dispatch(setError("Wystąpił błąd. Spróbuj ponownie."));
+    toast.error("Connection error. Please check if the server is running.");
     console.error(err);
   }
 };
@@ -60,7 +71,17 @@ export async function registerUser(data: {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Błąd rejestracji.");
+    // Próbujemy odczytać błąd jako JSON, jeśli się nie uda - jako text
+    let errorMessage = "Registration error.";
+    try {
+      const errorData = await response.json();
+      errorMessage = errorData.message || "Registration error.";
+    } catch {
+      const errorText = await response.text();
+      errorMessage = errorText || "Registration error.";
+    }
+    throw new Error(errorMessage);
   }
+  
+  toast.success("Registration successful! You can now log in.");
 }

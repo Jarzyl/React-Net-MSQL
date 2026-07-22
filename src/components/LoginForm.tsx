@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import TextInput from "./reusable/TextInput";
 import { loginUser } from "../services/authService";
 
@@ -13,12 +13,12 @@ interface LoginFormInputs {
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const error = useSelector((state: any) => state.auth.error); // Odczytujemy błąd z Redux
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
+  const navigate = useNavigate();
 
   // const onSubmit: SubmitHandler<LoginFormInputs> = async ({ email, password }) => {
   //   try {
@@ -48,7 +48,7 @@ export default function LoginForm() {
   const onSubmit: SubmitHandler<LoginFormInputs> = async ({ email, password }) => {
     const data = await loginUser(email, password, dispatch);
     if (data) {
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     }
   };
 
@@ -98,11 +98,6 @@ export default function LoginForm() {
             }}
             errors={errors}
           />
-
-          {/* Error message */}
-          {error && (
-            <div className="text-sm text-red-500">{error}</div>
-          )}
 
           {/* Submit button */}
           <div>

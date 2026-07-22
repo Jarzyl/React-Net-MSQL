@@ -27,7 +27,7 @@ function ForumPage() {
   }
 
   if (error) {
-    return <p>Błąd: {error}</p>;
+    return <p>Error: {error}</p>;
   }
 
   return (

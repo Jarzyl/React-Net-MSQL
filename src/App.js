@@ -8,6 +8,7 @@ import RegisterPage from "./pages/register/RegisterPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import ForumPage from "./pages/forum/ForumPage";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+      <Toaster position="top-center" />
       <Layout>
         <Routes>
           <Route path="/" element={<HeroSection />} />
