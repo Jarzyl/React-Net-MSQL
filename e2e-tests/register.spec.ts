@@ -34,7 +34,7 @@ test('should show error when passwords do not match', async ({ page }) => {
   await page.click('button[type="submit"]');
 
   // Sprawdź, czy pojawił się komunikat o błędzie dla potwierdzenia hasła
-  await expect(page.locator('text=Hasła muszą być takie same.')).toBeVisible();
+  await expect(page.locator('text=Passwords must match.')).toBeVisible();
 });
 
 test('should show error when email is already taken', async ({ page }) => {
@@ -55,5 +55,5 @@ test('should show error when email is already taken', async ({ page }) => {
   await page.click('button[type="submit"]');
 
   // Sprawdź, czy pojawił się komunikat o błędzie dla emaila
-  await expect(page.locator('text=Rejestracja nie powiodła się.')).toBeVisible();
+  await expect(page.locator('text=Registration failed.')).toBeVisible();
 });

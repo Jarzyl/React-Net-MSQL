@@ -10,7 +10,7 @@ const HabitList: React.FC = () => {
   const queryClient = useQueryClient();
 
   // Pobieranie habitów
-  const { data: habits, isLoading, error } = useQuery({
+  const { data: habits = [], isLoading, error } = useQuery<Habit[], Error>({
     queryKey: ['habits', userId], // Dodajemy userId do klucza zapytania, żeby miało unikalność
     queryFn: () => getHabits(userId),
     enabled: !!userId, // Włącz zapytanie tylko, jeśli userId jest dostępny
@@ -35,14 +35,16 @@ const HabitList: React.FC = () => {
     mutation.mutate(id); // Wywołanie mutacji usuwania nawyku
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading habits</div>;
+  if (!userId) return <div className="p-4">Please log in to view your habits.</div>;
+  if (isLoading) return <div className="p-4">Loading...</div>;
+  if (error) return <div className="p-4 text-red-600">Error loading habits: {error.message}</div>;
 
   return (
     <div className="p-4 mx-auto bg-white max-w-7xl">
       <h2 className="mb-4 text-2xl font-semibold text-center">My Habits</h2>
       <div className="grid grid-cols-2 gap-3">
-        {habits.map((habit: Habit) => (
+        {habits && habits.length > 0 ? (
+          habits.map((habit: Habit) => (
           // <div
           //   key={habit.id}
           //   className={`grid items-center p-4 w-96 h-52 rounded-lg border ${
@@ -74,13 +76,16 @@ const HabitList: React.FC = () => {
           //     </button>
           //   </div>
           // </div>
-          <HabitCard
-          key={habit.id}
-          habit={habit}
-          onToggle={handleToggle}
-          onRemove={handleRemove}
-        />
-        ))}
+            <HabitCard
+              key={habit.id}
+              habit={habit}
+              onToggle={handleToggle}
+              onRemove={handleRemove}
+            />
+          ))
+        ) : (
+          <div className="col-span-2 text-center text-gray-500">No habits found.</div>
+        )}
       </div>
     </div>
   );
